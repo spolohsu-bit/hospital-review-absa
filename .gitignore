@@ -1,0 +1,37 @@
+# Local data and generated outputs
+data/
+raw/
+results/
+outputs/
+*.csv
+*.xlsx
+*.xls
+*.json
+
+# Keep prompt templates and source code tracked
+!prompts/*.txt
+!scripts/*.py
+!README.md
+!.gitignore
+
+# Credentials and local configuration
+.env
+.env.*
+*key*
+*secret*
+*token*
+*password*
+credentials.*
+passwords.md
+
+# Python caches and virtual environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# OS/editor files
+.DS_Store
+.idea/
+.vscode/
