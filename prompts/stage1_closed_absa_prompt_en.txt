@@ -1,0 +1,114 @@
+You are a professional healthcare service quality analyst. Please analyze the following patient review from a Taiwanese hospital. Identify all healthcare service quality dimensions (aspects) mentioned and their sentiment orientation.
+
+**Task Description**
+
+Based on the review content, identify all mentioned quality dimensions and perform sentiment analysis. Each dimension must be annotated with:
+
+1. **aspect_category**: Quality dimension category (select from the 7 predefined categories below)
+2. **aspect_term**: The specific term mentioned (eg, "doctor's attitude," "waiting time")
+3. **opinion**: Verbatim excerpt (do not paraphrase; preserve the original wording)
+4. **sentiment**: Sentiment polarity (positive / negative / neutral)
+5. **sentiment_score**: Sentiment score (**must be −1, 0, or +1 only**)
+   - positive → +1
+   - neutral → 0
+   - negative → −1
+6. **confidence**: Confidence score (0.0 to 1.0, your certainty about the judgment)
+
+**Seven Predefined Quality Dimensions**
+
+1. **Emergency Care**
+- Definition: Emergency department waiting time, emergency medical quality, emergency procedures, emergency equipment
+- Example terms: emergency department, long wait, emergency room, first aid, urgent treatment
+- Example sentences: "Waited 3 hours in the ER before seeing a doctor"; "The ER doctor was very professional"
+
+2. **Professional Quality**
+- Definition: Physician expertise, diagnostic accuracy, treatment effectiveness, medical technology, examination quality
+- Example terms: physician, professional, examination, diagnosis, treatment, surgery, internal medicine
+- Example sentences: "The doctor patiently explained the condition"; "The examination was thorough"
+
+3. **Service Attitude**
+- Definition: Healthcare staff attitude, communication style, empathy, respect for patients
+- Example terms: attitude, impatient, indifferent, friendly, polite, lacking empathy
+- Example sentences: "The nurse had a terrible attitude"; "The doctor was very patient"
+
+4. **Administrative Processes**
+- Definition: Registration process, consultation flow, waiting time (non-emergency), billing and payment, check-in procedures
+- Example terms: registration, waiting, consultation, appointment, billing, payment, check-in
+- Example sentences: "Registration took a long time"; "The consultation process was chaotic"
+
+5. **Facility & Environment**
+- Definition: Hospital environment, facility conditions, cleanliness, space planning, transportation accessibility
+- Example terms: environment, facilities, clean, comfortable, parking, outdated
+- Example sentences: "The hospital environment was very clean"; "The equipment was outdated"
+
+6. **Surgical & Specialty Care**
+- Definition: Surgical quality, pre- and post-operative care, specialty medical care, complex treatments
+- Example terms: surgery, operation, post-operative, specialty, treatment, rehabilitation
+- Example sentences: "The surgery was successful"; "Post-operative care was inadequate"
+
+7. **Inpatient Care**
+- Definition: Inpatient services, ward environment, nursing care, admission process, discharge process
+- Example terms: hospitalization, ward, nurse, care, discharge
+- Example sentences: "The nurses were very attentive during hospitalization"; "The ward environment was comfortable"
+
+**Output Format (JSON)**
+
+Output in JSON format with an `aspects` array, where each element represents one identified quality dimension.
+
+Example output:
+
+```json
+{
+  "aspects": [
+    {
+      "aspect_category": "Emergency Care",
+      "aspect_term": "waiting time",
+      "opinion": "Waited 3 hours in the ER before seeing a doctor",
+      "sentiment": "negative",
+      "sentiment_score": -1,
+      "confidence": 0.95
+    },
+    {
+      "aspect_category": "Emergency Care",
+      "aspect_term": "doctor expertise",
+      "opinion": "The ER doctor handled it very professionally",
+      "sentiment": "positive",
+      "sentiment_score": 1,
+      "confidence": 0.9
+    },
+    {
+      "aspect_category": "Professional Quality",
+      "aspect_term": "thorough examination",
+      "opinion": "The doctor examined very carefully",
+      "sentiment": "positive",
+      "sentiment_score": 1,
+      "confidence": 0.9
+    }
+  ]
+}
+```
+
+**Critical Rules**
+
+1. A single review may contain multiple dimensions (eg, both Emergency Care and Professional Quality).
+2. The same dimension may appear multiple times (eg, "long ER wait" and "rude ER doctor" both belong to Emergency Care but are output as separate entries).
+3. Each entry is scored independently (even entries under the same dimension receive individual sentiment annotations).
+4. Sentiment polarity may differ within the same dimension (eg, poor ER waiting time but professional doctor).
+5. The opinion field must be a verbatim excerpt (do not paraphrase or translate; preserve the patient's original wording).
+6. sentiment_score must be −1, 0, or +1 only (positive = +1, neutral = 0, negative = −1).
+7. All aspect_category values must be selected from the 7 categories listed above.
+8. If the review is empty or no dimension can be identified, return an empty array: `{"aspects": []}`.
+9. Use contextual cues to determine sentiment:
+   - Read the full context of the review carefully.
+   - Pay attention to logical relationships between sentences.
+   - If positive wording is followed by complaints or criticism, the positive language may be sarcastic or ironic.
+10. Sarcasm in Taiwanese colloquial expressions:
+    - Phrases such as "有夠棒的" (how wonderful), "真棒" (really great), "超好的" (super good), "讚啦" (awesome) are exaggeratedly positive expressions.
+    - If subsequent content contains complaints, problem descriptions, or an overall negative tone, these expressions are typically sarcastic.
+    - Determine true sentiment based on overall tone and subsequent content.
+
+**Patient Review**
+
+{review_text}
+
+Please analyze the above review and output the results in JSON format.
