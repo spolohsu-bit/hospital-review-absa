@@ -140,4 +140,7 @@ The included `.gitignore` excludes common local data folders, generated outputs,
 
 ## Persistent Identifier
 
-For journal submission, create a public GitHub release and archive it through Zenodo, OSF, or another repository service that issues a persistent identifier. Replace the manuscript placeholder with the final DOI or persistent URL after archiving.
+The v1.0.1 release of this repository has been archived on Zenodo with the persistent identifier DOI: `10.5281/zenodo.21122768`.
+
+GitHub release: https://github.com/spolohsu-bit/hospital-review-absa/releases/tag/v1.0.1
+Zenodo DOI: https://doi.org/10.5281/zenodo.21122768
