@@ -12,7 +12,6 @@ The materials include prompt templates and analysis scripts used for aspect-base
 prompts/
   stage1_closed_absa_prompt_zh-TW.txt
   stage1_closed_absa_prompt_en.txt
-  stage2_open_absa_prompt_zh-TW.txt
 
 scripts/
   run_absa_demo.py
@@ -32,9 +31,8 @@ Derived aggregate tables and additional verification materials may be available 
 
 - `prompts/stage1_closed_absa_prompt_zh-TW.txt`: closed-set ABSA prompt using seven predefined service-quality aspects (Traditional Chinese, as used in the study).
 - `prompts/stage1_closed_absa_prompt_en.txt`: English translation of the closed-set ABSA prompt.
-- `prompts/stage2_open_absa_prompt_zh-TW.txt`: open-set prompt used to inspect possible emerging aspects outside the seven-category taxonomy.
 
-Both prompt templates use `{review_text}` as the review placeholder.
+Both prompt files use `{review_text}` as the review placeholder.
 
 ## Scripts
 
